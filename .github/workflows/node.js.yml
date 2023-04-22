@@ -25,7 +25,11 @@ jobs:
     - run: npm run build --if-present
     - run: npm test
     - name: upload artifacts
-      uses: actions/upload-pages-artifact
+      uses: actions/upload-artifact@master
+      with:
+        name: page
+        path: dist
+        if-no-files-found: error
 
   # Deployment job
   deploy:
@@ -39,6 +43,13 @@ jobs:
       id-token: write   # to verify the deployment originates from an appropriate source
 
     steps:
-      - name: Deploy GitHub Pages site
-        id: deployment
-        uses: actions/deploy-pages@v2.0.1
+      - uses: actions/download-artifact@master
+        with:
+          name: page
+          path: .
+      - uses: actions/configure-pages@v1
+      - uses: actions/upload-pages-artifact@v1
+        with:
+          path: .
+      - id: deployment
+        uses: actions/deploy-pages@main
