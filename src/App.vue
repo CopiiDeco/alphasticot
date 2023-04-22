@@ -1,26 +1,30 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <NavBar/>
+  <LetterGuess class="home"/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import LetterGuess from './components/LetterGuess.vue'
+import NavBar from "@/components/NavBar";
+import { usePrimeVue } from 'primevue/config';
+import 'primevue/resources/themes/md-dark-indigo/theme.css';
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    LetterGuess,
+    NavBar
+  },
+  mounted(){
+    usePrimeVue().changeTheme('md-dark-indigo', 'md-dark-indigo', 'theme-link', () => {});
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body {
+  height: 100vh;
+}
+.home {
+  height: 100vh;
 }
 </style>
